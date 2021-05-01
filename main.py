@@ -139,8 +139,9 @@ def main():
     feats = torch.FloatTensor(feats).to(device)
     shuf_feats = torch.FloatTensor(shuf_feats).to(device)
 
-    model_pretrain.train()
+    
     for epoch in range(1, args.epochs + 1):
+		model_pretrain.train()
         loss_pretrain = model_pretrain(feats, shuf_feats, Adj, None, None, None, cluster_info, args.num_cluster)
         if optimizer_train is not None:
             optimizer_train.zero_grad()
@@ -149,6 +150,7 @@ def main():
 
         # re-clustering
         if epoch % 20 == 0 and epoch < args.epochs:
+			model_pretrain.eval()
             emb = model_pretrain.get_emb(feats, Adj)
             kmeans = KMeans(n_clusters=args.num_cluster, random_state=0).fit(emb.detach().cpu().numpy())
             ss_label = kmeans.labels_

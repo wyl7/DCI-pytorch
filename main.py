@@ -110,6 +110,8 @@ def main():
                         help='learning rate (default: 0.001)')
     parser.add_argument('--num_cluster', type=int, default=2,
                         help='number of clusters (default: 2)')
+    parser.add_argument('--recluster_interval', type=int, default=20,
+                        help='the interval of reclustering (default: 20)')
     parser.add_argument('--final_dropout', type=float, default=0.5,
                         help='final layer dropout (default: 0.5)')
     parser.add_argument('--neighbor_pooling_type', type=str, default="sum", choices=["sum", "average"],
@@ -149,15 +151,12 @@ def main():
             optimizer_train.step()
 
         # re-clustering
-        if epoch % 20 == 0 and epoch < args.epochs:
+        if epoch % args.recluster_interval == 0 and epoch < args.epochs:
             model_pretrain.eval()
             emb = model_pretrain.get_emb(feats, Adj)
             kmeans = KMeans(n_clusters=args.num_cluster, random_state=0).fit(emb.detach().cpu().numpy())
             ss_label = kmeans.labels_
-            loc = np.zeros((nb_nodes, args.num_cluster))
-            for i in range(nb_nodes):
-                loc[i, ss_label[i]] = 1
-            cluster_info = [list(np.where(loc[:, i]==1)[0]) for i in range(args.num_cluster)]
+            cluster_info = [list(np.where(ss_label==i)[0]) for i in range(args.num_cluster)]
     
     print('Pre-training Down!')
             

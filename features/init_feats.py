@@ -48,7 +48,7 @@ def process_adj(dataSetName):
 datasetName = sys.argv[1]
 adj, n = process_adj('../data/'+datasetName+'.txt')
 hidden_size = 64
-in_degree = [np.sum(adj.data[adj.indptr[i]:adj.indptr[i+1]]) for i in range(n)]
+in_degree = [np.sum(adj.data[adj.indptr[i]: adj.indptr[i+1]]) for i in range(n)]
 in_degree = np.array(in_degree)
 x = intial_embedding(n, adj, in_degree, hidden_size, retry=10)
 np.save(datasetName+'_feature64.npy', x)

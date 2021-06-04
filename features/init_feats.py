@@ -7,10 +7,7 @@ import sys
 np.random.seed(0)
 
 def eigen_decomposision(n, k, laplacian, hidden_size, retry):
-    if k <= 0:
-        return torch.zeros(n, hidden_size)
     laplacian = laplacian.astype("float64")
-    #print(type(laplacian))
     ncv = min(n, max(2 * k + 1, 20))
     v0 = np.random.rand(n).astype("float64")
     for i in range(retry):
@@ -39,19 +36,13 @@ def intial_embedding(n, adj, in_degree,hidden_size, retry=10):
     return x
 
 def process_adj(dataSetName):
-    data = np.loadtxt(dataSetName).astype('int')
-    userId = data[:, 0]
-    itemId = data[:, 1]
-    user_num = len(list(set(userId)))
-    item_num = len(list(set(itemId)))
+    edges = np.loadtxt(dataSetName).astype('int')
+    node_num = len(set(edges[:, 0])) + len(set(edges[:, 1]))
 
-    node_num = user_num + item_num
-    adj = np.zeros([node_num,node_num], dtype=np.int)
-    for edge in data:
-        adj[edge[0], edge[1]] = 1
-        adj[edge[1], edge[0]] = 1
-    
-    adj = sp.csr_matrix(adj)
+    row = list(edges[:, 0].T) + list(edges[:, 1].T)
+    col = list(edges[:, 1].T) + list(edges[:, 0].T)
+    data = [1.0 for _ in range(len(row))]
+    adj = sp.csr_matrix((data, (row, col)), shape=(node_num, node_num))
     return adj, node_num
 
 datasetName = sys.argv[1]

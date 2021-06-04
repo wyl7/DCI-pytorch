@@ -1,6 +1,6 @@
 # DCI-pytorch
-The pytorch implementation of decoupling representation learning and classification for GNN-based anomaly detection.
- See our [paper](https://xiaojingzi.github.io/publications/SIGIR21-Wang-et-al-decoupled-GNN.pdf) for details on the algorithm.
+The pytorch implementation of decoupling representation learning and classification for GNN-based anomaly detection. We run on a DELL server with 2 * Intel(R) Xeon(R) Silver 4210, 4 * NVIDIA TITAN V (12G), 10 * 32GB DDR4 RAM and 1 * 8TB hard disk.
+See our [paper](https://xiaojingzi.github.io/publications/SIGIR21-Wang-et-al-decoupled-GNN.pdf) for details on the algorithm.
 
 Abstract
 ====
@@ -11,11 +11,7 @@ Decoupled training can alleviate the negative effects caused by the inconsistenc
 The proposed SSL scheme, called Deep cluster Infomax (DCI), can contribute to the decoupled training. 
 In effect, the idea of decoupled training is not restricted to the anomaly detection.
 
-<img src="https://github.com/wyl7/DCI-pytorch/blob/main/jointVsDecoupled.PNG" with="50">
-
-Setting
-====
-We run on a DELL server with 2 * Intel(R) Xeon(R) Silver 4210, 4 * NVIDIA TITAN V (12G), 10 * 32GB DDR4 RAM and 1 * 8TB hard disk.
+<img src="https://github.com/wyl7/DCI-pytorch/blob/main/jointVsDecoupled.PNG" with="10">
 
 Requirements
 ====
@@ -44,15 +40,13 @@ We have processed the node_id, so that the top node_ids all correspond to the us
 ```$python init_feats.py dataName```
 to generate the initial node features. 
 Specially, we perform eigen-decomposition on the normalized adjacency matrix for the feature initialization.
-For the large-scale graphs, you can also adopt other algorithms, such as [DeepWalk](https://github.com/phanein/deepwalk)[1] and [Node2Vec](https://github.com/aditya-grover/node2vec)[2], to generate the initial node features;
+For the large-scale graphs, you can also adopt other algorithms, such as [DeepWalk](https://github.com/phanein/deepwalk)[1] and [Node2Vec](https://github.com/aditya-grover/node2vec)[2], to generate the initial node features.
 
 * `models/` contains the implementation of the DGI loss (`dgi.py`), DCI loss (`dci.py`) and the binary classifier (`clf_model.py`).
 
-* `layers/` contains the implementation of the GIN layer (`gin.py`), the MLP layer (`mlp.py`), the averaging readout (`readout.py`), and the bi-linear discriminator (`discriminator.py`);
+* `layers/` contains the implementation of the GIN layer (`graphcnn.py`), the MLP layer (`mlp.py`), the averaging readout (`readout.py`), and the bi-linear discriminator (`discriminator.py`). `readout.py` and `discriminator.py` are copied from the source code of [Deep Graph Infomax](https://github.com/PetarV-/DGI)[4]. `mlp.py` is copied from the source code of [GIN](https://github.com/weihua916/powerful-gnns)[3]. `graphcnn.py` is revised based on the corresponding implemention in [GIN](https://github.com/weihua916/powerful-gnns).
 
 * `util.py` is used for loading and pre-processing the dataset.
-
-We refer to the source codes of [GIN](https://github.com/weihua916/powerful-gnns)[3] and [Deep Graph Infomax](https://github.com/PetarV-/DGI)[4] to implement our code.
 
 Running the code
 ====

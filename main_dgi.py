@@ -97,7 +97,7 @@ def main():
     parser.add_argument('--finetune_epochs', type=int, default=100,
                         help='number of finetune epochs (default: 100)')
     parser.add_argument('--num_layers', type=int, default=2,
-                        help='number of layers INCLUDING the input one (default: 5)')
+                        help='number of layers (default: 2)')
     parser.add_argument('--num_mlp_layers', type=int, default=2,
                         help='number of layers for MLP EXCLUDING the input one (default: 2). 1 means linear model.')
     parser.add_argument('--hidden_dim', type=int, default=128,

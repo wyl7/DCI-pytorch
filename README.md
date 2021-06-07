@@ -1,5 +1,5 @@
 # DCI-pytorch
-The pytorch implementation of decoupling representation learning and classification for GNN-based anomaly detection. We run on a DELL server with 2 * Intel(R) Xeon(R) Silver 4210, 4 * NVIDIA TITAN V (12G), 10 * 32GB DDR4 RAM and 1 * 8TB hard disk.
+The pytorch implementation of decoupling representation learning and classification for GNN-based anomaly detection (SIGIR 2021). We run on a DELL server with 2 * Intel(R) Xeon(R) Silver 4210, 4 * NVIDIA TITAN V (12G), 10 * 32GB DDR4 RAM and 1 * 8TB hard disk.
 See our [paper](https://xiaojingzi.github.io/publications/SIGIR21-Wang-et-al-decoupled-GNN.pdf) for details on the algorithm.
 
 Abstract

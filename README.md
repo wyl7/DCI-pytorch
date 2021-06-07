@@ -13,6 +13,16 @@ In effect, the idea of decoupled training is not restricted to the anomaly detec
 
 <img src="https://github.com/wyl7/DCI-pytorch/blob/main/jointVsDecoupled.PNG" with="10">
 
+If you make use of our idea in your work, please cite the following paper:
+```
+ @inproceedings{Wang2021decoupling,
+     author = {Yanling Wang and Jing Zhang and Shasha Guo and Hongzhi Yin and Cuiping Li and Hong Chen},
+     title = {Decoupling Representation Learning and Classification for GNN-based Anomaly Detection},
+     booktitle = {SIGIR},
+     year = {2021}
+   }
+```
+
 Requirements
 ====
 You can create a virtual environment first via:

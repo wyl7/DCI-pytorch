@@ -11,7 +11,6 @@ class GraphCNN(nn.Module):
             num_mlp_layers: number of layers in mlps (EXCLUDING the input layer)
             input_dim: dimensionality of input features
             hidden_dim: dimensionality of hidden units at ALL layers
-            output_dim: number of classes for prediction
             neighbor_pooling_type: how to aggregate neighbors (mean, average, or max)
             device: which device to use
         '''

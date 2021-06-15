@@ -57,8 +57,6 @@ class GraphCNN(nn.Module):
 
     
     def forward(self, feats, adj):
-
-        #list of hidden representation at each layer (including input)
         h = feats
         for layer in range(self.num_layers):
             h = self.next_layer(h, layer, Adj_block = adj)

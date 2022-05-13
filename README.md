@@ -42,9 +42,7 @@ Overview
 Here we provide the implementation of different training schemes (i.e., joint training and decoupled training) in PyTorch, 
 along with an execution example (on the Wiki dataset). For the decoupled training, we provide different instantiations of the SSL loss function, 
 including DGI and DCI. Specifically, the repository is organized as follows:
-* `data/` contains the files for Wiki dataset. `dataName.txt` stores the edges in the graph. Format is: node_id, node_id.
-`dataName_label.txt` stores the user labels. Format is: node_id, label, where the user label is a binary value which takes value 1 if the user is abnormal and 0 otherwise.
-We have processed the node_id, so that the top node_ids all correspond to the users.
+* `data/` contains the files for Wiki dataset. `dataName.txt` stores the edges in the graph. Format is: node_id, node_id. The first column in `dataName.txt` is user ID. The second column in `dataName.txt` is item ID. If the dataset contains N users, a user's node id is between 0 and N-1. `dataName_label.txt` stores the user labels. Format is: node_id, label, where the user label is a binary value which takes value 1 if the user is abnormal and 0 otherwise.
 
 * `features/` contains the initial node features. You can run:
 ```$python init_feats.py dataName```
